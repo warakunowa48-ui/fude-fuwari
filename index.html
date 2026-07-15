@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>筆文字アート教室「筆ふわり」| にしみねきよみ</title>
+    <!-- Google Fonts: 柔らかく美しい和風フォント -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons for Beautiful UX -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        /* ==========================================
+           1. 全体設定・配色（和紙のような生成りと優しい桃色）
+           ========================================== */
+        :root {
+            --bg-base: #fdfbf7;      /* 温かみのある生成り色 */
+            --bg-accent: #f7f2ea;    /* 落ち着いた薄ベージュ */
+            --primary: #8a5e5e;      /* 墨に少し赤みを混ぜたような上品なえんじ色 */
+            --secondary: #e29c9c;    /* 優しい桃色（パステル調のアクセント） */
+            --text-dark: #2c2c2c;    /* 柔らかい墨黒（読みやすさを確保） */
+            --text-muted: #5c5c5c;   /* 落ち着いたアッシュグレー */
+            --font-serif: 'Noto Serif JP', serif;
+            --font-sans: 'Noto Sans JP', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-base);
+            color: var(--text-dark);
+            font-family: var(--font-sans);
+            line-height: 1.8;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        /* ふんわり浮き上がるアニメーション */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ==========================================
+           2. ヘッダー（ナビゲーション）
+           ========================================== */
+        header {
+            background-color: rgba(253, 251, 247, 0.95);
+            backdrop-filter: blur(5px);
+            border-bottom: 1px solid rgba(226, 156, 156, 0.15);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+        }
+
+        .header-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-serif);
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--primary);
+            letter-spacing: 0.05em;
+        }
+
+        .logo span {
+            font-size: 14px;
+            font-weight: 400;
+            color: var(--text-muted);
+            display: block;
+            margin-bottom: -4px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        nav a {
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--text-dark);
+            position: relative;
+            padding: 5px 0;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--secondary);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* ==========================================
+           3. メインビジュアル（ヒーローエリア）
+           ========================================== */
+        .hero {
+            padding: 140px 20px 80px;
+            background: radial-gradient(circle at 10% 20%, rgba(226, 156, 156, 0.08) 0%, rgba(253, 251, 247, 0) 60%);
+            position: relative;
+        }
+
+        .hero-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .hero-content {
+            z-index: 2;
+        }
+
+        .hero-tagline {
+            display: inline-block;
+            background-color: #f0eae1;
+            color: var(--primary);
+            font-size: 14px;
+            font-weight: 700;
+            padding: 4px 16px;
+            border-radius: 50px;
+            margin-bottom: 20px;
+            letter-spacing: 0.08em;
+        }
+
+        .hero h1 {
+            font-family: var(--font-serif);
+            font-size: 42px;
+            line-height: 1.4;
+            color: var(--text-dark);
+            margin-bottom: 25px;
+            letter-spacing: 0.05em;
+        }
+
+        .hero h1 span.highlight {
+            color: var(--primary);
+            display: block;
+            font-size: 24px;
+            font-weight: 400;
+            margin-bottom: 10px;
+            font-family: var(--font-sans);
+            letter-spacing: 0.02em;
+        }
+
+        .hero-desc {
+            font-size: 16px;
+            color: var(--text-muted);
+            margin-bottom: 35px;
+            max-width: 500px;
+        }
+
+        .hero-image-wrapper {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* 描いている手元の温かいお写真用の枠 */
+        .hero-main-img {
+            width: 100%;
+            height: 380px;
+            border-radius: 20px;
+            object-fit: cover;
+            box-shadow: 0 15px 35px rgba(120, 100, 80, 0.12);
+        }
+
+        /* 先生の小さなインスタアイコン風プロフィール写真の重ね配置 */
+        .profile-badge {
+            position: absolute;
+            bottom: -20px;
+            left: -20px;
+            background: white;
+            padding: 10px 18px;
+            border-radius: 50px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border: 1px solid rgba(226, 156, 156, 0.2);
+        }
+
+        .profile-badge img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--secondary);
+        }
+
+        .profile-badge-text {
+            line-height: 1.3;
+        }
+
+        .profile-badge-text .name {
+            font-weight: 700;
+            font-size: 14px;
+            color: var(--text-dark);
+            display: block;
+        }
+
+        .profile-badge-text .title {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        /* ==========================================
+           4. コンセプト（想い・プロフィール）
+           ========================================== */
+        .section {
+            padding: 100px 20px;
+        }
+
+        .section-alt {
+            background-color: var(--bg-accent);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-family: var(--font-serif);
+            font-size: 32px;
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+            letter-spacing: 0.05em;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 2px;
+            background-color: var(--secondary);
+        }
+
+        .concept-container {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .concept-lead {
+            font-family: var(--font-serif);
+            font-size: 24px;
+            color: var(--primary);
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .concept-text {
+            font-size: 16px;
+            color: var(--text-muted);
+            max-width: 750px;
+            margin: 0 auto 50px;
+            text-align: left;
+        }
+
+        .concept-text p {
+            margin-bottom: 20px;
+        }
+
+        /* 特徴のカード配置 */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            max-width: 1000px;
+            margin: 50px auto 0;
+        }
+
+        .feature-card {
+            background-color: white;
+            padding: 35px 25px;
+            border-radius: 16px;
+            box-shadow: 0 5px 20px rgba(120, 100, 80, 0.03);
+            border: 1px solid rgba(226, 156, 156, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-card .icon {
+            font-size: 32px;
+            color: var(--secondary);
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-family: var(--font-serif);
+            font-size: 20px;
+            margin-bottom: 12px;
+            color: var(--primary);
+        }
+
+        .feature-card p {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* ==========================================
+           5. 教室スケジュール（自分で更新するメイン部分）
+           ========================================== */
+        .schedule-box {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 45px;
+            box-shadow: 0 10px 30px rgba(120, 100, 80, 0.05);
+            border: 1px solid rgba(226, 156, 156, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .schedule-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(90deg, var(--secondary), var(--primary));
+        }
+
+        .schedule-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px dashed rgba(226, 156, 156, 0.3);
+            padding-bottom: 25px;
+            margin-bottom: 30px;
+        }
+
+        .class-tag {
+            background-color: rgba(226, 156, 156, 0.15);
+            color: var(--primary);
+            padding: 4px 14px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .schedule-details {
+            display: grid;
+            grid-template-columns: 100px 1fr;
+            gap: 20px 15px;
+            align-items: center;
+            font-size: 16px;
+            margin-bottom: 35px;
+        }
+
+        .schedule-label {
+            font-weight: 700;
+            color: var(--primary);
+            border-left: 3px solid var(--secondary);
+            padding-left: 10px;
+        }
+
+        .schedule-value {
+            color: var(--text-dark);
+        }
+
+        /* ボタンデザイン */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background-color: var(--primary);
+            color: white !important;
+            padding: 16px 40px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 16px;
+            box-shadow: 0 8px 25px rgba(138, 94, 94, 0.25);
+            letter-spacing: 0.05em;
+            transition: all 0.3s ease;
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .btn:hover {
+            background-color: var(--secondary);
+            box-shadow: 0 8px 25px rgba(226, 156, 156, 0.35);
+            transform: translateY(-2px);
+        }
+
+        .btn i {
+            font-size: 18px;
+        }
+
+        /* ==========================================
+           6. 公式LINE特典セクション
+           ========================================== */
+        .line-section {
+            background: linear-gradient(135deg, #eaf6ee 0%, #fdfbf7 100%);
+            border-radius: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 50px 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+            border: 1px solid rgba(162, 216, 187, 0.2);
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .line-badge {
+            display: inline-block;
+            background-color: #06C755;
+            color: white;
+            font-weight: 700;
+            font-size: 12px;
+            padding: 4px 12px;
+            border-radius: 50px;
+            margin-bottom: 15px;
+        }
+
+        .line-content h3 {
+            font-family: var(--font-serif);
+            font-size: 24px;
+            color: #2c2c2c;
+            margin-bottom: 15px;
+        }
+
+        .line-content p {
+            font-size: 15px;
+            color: var(--text-muted);
+            margin-bottom: 25px;
+        }
+
+        .line-gift-box {
+            background-color: white;
+            border-radius: 12px;
+            padding: 15px 20px;
+            border-left: 4px solid #06C755;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        .line-gift-box ul {
+            list-style: none;
+            padding-left: 5px;
+        }
+
+        .line-gift-box li {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        .line-gift-box li i {
+            color: #06C755;
+        }
+
+        .btn-line {
+            background-color: #06C755;
+            box-shadow: 0 8px 25px rgba(6, 199, 85, 0.2);
+        }
+
+        .btn-line:hover {
+            background-color: #05b04b;
+            box-shadow: 0 8px 25px rgba(6, 199, 85, 0.3);
+        }
+
+        .line-image {
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* 和風パステル調の画材セット/水彩筆記イメージ */
+        .line-art-img {
+            width: 100%;
+            max-width: 280px;
+            height: 220px;
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+
+        /* ==========================================
+           7. ギャラリー（作品とお写真）
+           ========================================== */
+        .gallery-nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .gallery-tab {
+            background-color: transparent;
+            border: 1px solid var(--secondary);
+            color: var(--primary);
+            padding: 8px 25px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .gallery-tab.active, .gallery-tab:hover {
+            background-color: var(--secondary);
+            color: white;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(120, 100, 80, 0.03);
+            border: 1px solid rgba(226, 156, 156, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.02);
+        }
+
+        .gallery-img-wrapper {
+            height: 220px;
+            overflow: hidden;
+        }
+
+        .gallery-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gallery-info {
+            padding: 15px;
+            text-align: center;
+            font-size: 14px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* ==========================================
+           8. お問い合わせ & SNS
+           ========================================== */
+        .footer-banner {
+            background-color: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 60px 20px;
+            border-radius: 20px;
+            max-width: 900px;
+            margin: 0 auto 50px;
+        }
+
+        .footer-banner h3 {
+            font-family: var(--font-serif);
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
+
+        .footer-banner p {
+            font-size: 15px;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .btn-white {
+            background-color: white;
+            color: var(--primary) !important;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+        }
+
+        .btn-white:hover {
+            background-color: var(--bg-accent);
+            box-shadow: 0 8px 25px rgba(255,255,255,0.2);
+        }
+
+        footer {
+            background-color: var(--bg-accent);
+            padding: 60px 20px 40px;
+            text-align: center;
+            border-top: 1px solid rgba(226, 156, 156, 0.15);
+        }
+
+        .sns-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .sns-btn {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: var(--primary);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+            border: 1px solid rgba(226, 156, 156, 0.15);
+        }
+
+        .sns-btn:hover {
+            background-color: var(--secondary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .copyright {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        /* ==========================================
+           9. スマホ対応 (Responsive Layout)
+           ========================================== */
+        @media (max-width: 768px) {
+            header {
+                padding: 5px 0;
+            }
+
+            .logo {
+                font-size: 18px;
+            }
+
+            .logo span {
+                font-size: 12px;
+            }
+
+            nav ul {
+                gap: 15px;
+            }
+
+            nav a {
+                font-size: 13px;
+            }
+
+            .hero {
+                padding: 110px 20px 60px;
+            }
+
+            .hero-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                text-align: center;
+            }
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            .hero h1 span.highlight {
+                font-size: 18px;
+            }
+
+            .hero-desc {
+                margin: 0 auto 30px;
+            }
+
+            .hero-main-img {
+                height: 280px;
+            }
+
+            .profile-badge {
+                bottom: -15px;
+                left: 15px;
+                padding: 8px 14px;
+            }
+
+            .section {
+                padding: 60px 20px;
+            }
+
+            .section-title h2 {
+                font-size: 26px;
+            }
+
+            .concept-lead {
+                font-size: 18px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .schedule-box {
+                padding: 30px 20px;
+            }
+
+            .schedule-meta {
+                flex-direction: column;
+                gap: 10px;
+                align-items: flex-start;
+            }
+
+            .schedule-details {
+                grid-template-columns: 80px 1fr;
+                font-size: 15px;
+            }
+
+            .line-section {
+                grid-template-columns: 1fr;
+                padding: 30px 20px;
+            }
+
+            .line-image {
+                display: none; /* スマホではLINEセクションの画像を非表示にしてコンパクトに */
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr; /* スマホは1列、または2列 */
+                gap: 15px;
+            }
+            
+            .gallery-tab {
+                padding: 6px 15px;
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==========================================
+         ヘッダー（ナビゲーション）
+         ========================================== -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <span>筆文字アート教室</span>
+                筆ふわり
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#concept">想い</a></li>
+                    <li><a href="#schedule">日程</a></li>
+                    <li><a href="#gallery">作品</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ==========================================
+         メインビジュアル（ヒーロー）
+         ========================================== -->
+    <section class="hero">
+        <div class="hero-container fade-in">
+            <div class="hero-content">
+                <span class="hero-tagline">筆ふわり主宰 ｜ 季節のアトリエ</span>
+                <!-- 【メッセージの切り替え・相談エリア】
+                     現在一番お気に入りの「心の余白を」を大きく打ち出しています。 -->
+                <h1>
+                    <span class="highlight">言葉と色で、心をゆるめる。</span>
+                    忙しい毎日に、<br>心の余白を。
+                </h1>
+                <p class="hero-desc">
+                    介護10年を経て辿り着いた、自分自身を労うための優しい筆文字アート。手ぶらでふらっと集まって、ほっこり温まる時間をご一緒しませんか？初心者さんも大歓迎です。
+                </p>
+                <a href="#schedule" class="btn"><i class="fa-regular fa-calendar-check"></i>アトリエの詳細・申込へ</a>
+            </div>
+            <div class="hero-image-wrapper">
+                <!-- 【写真の変更】アトリエで描いている手元のお写真に変更できます -->
+                <img class="hero-main-img" src="http://googleusercontent.com/image_collection/image_retrieval/18181828935079467888_0" alt="アトリエで温かい筆文字アートを描く手元と作品の様子">
+                
+                <!-- 先生の小さな笑顔プロフィールアイコン -->
+                <div class="profile-badge">
+                    <!-- 【写真の変更】先生の顔写真をアップロードしたら「kiyomi-photo.jpg」などに書き換えてください -->
+                    <img src="https://placehold.co/100x100/e29c9c/ffffff?text=Kiyomi" alt="にしみねきよみ先生の笑顔写真">
+                    <div class="profile-badge-text">
+                        <span class="name">にしみね きよみ</span>
+                        <span class="title">心を整える筆文字アート講師</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         コンセプト（想い・特徴）
+         ========================================== -->
+    <section id="concept" class="section section-alt">
+        <div class="concept-container">
+            <div class="section-title">
+                <h2>季節のアトリエにかける想い</h2>
+            </div>
+            <p class="concept-lead">「描くたび、もっと自分が好きになる。」</p>
+            <div class="concept-text">
+                <p>
+                    私は10年間、介護に携わってきました。誰かを一生懸命お世話する毎日は尊いけれど、ふと気づくと自分をケアする時間を見失ってしまいがちです。
+                </p>
+                <p>
+                    そんな日々のなかで、私が心から救われ、ふっと余白を取り戻せたのが「筆文字アート」でした。
+                </p>
+                <p>
+                    「季節のアトリエ」では、パステルや水彩の優しい色使いと、自分だけの文字を紡ぐ技術をしっかりお伝えします。ですがそれ以上に、教室に来るだけで心がじんわりと整うこと、帰る時には「今日の自分、がんばってるな」と愛おしく思える、そんなやさしい場作りを大切にしています。
+                </p>
+            </div>
+
+            <!-- 教室の3つのポイント -->
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                    <h3>手ぶらで気軽にOK</h3>
+                    <p>筆ペンや水彩、パステルなど、アトリエで使う画材はすべてこちらでご用意しています。初めての方も安心してお越しください。</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon"><i class="fa-solid fa-graduation-cap"></i></div>
+                    <h3>技術をしっかり指導</h3>
+                    <p>「自分にはセンスがないかも」という方でも、筆の動かし方から配色のコツまで、講師の私が優しく丁寧にお教えします。</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon"><i class="fa-solid fa-heart-pulse"></i></div>
+                    <h3>自分を労う「余白」</h3>
+                    <p>綺麗なアートを描く時間を通じて、忙しい現実のスイッチを少しだけオフに。心がふっと軽くなる感覚を体験してください。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         【更新エリア】開催スケジュールと申込（毎月書き換えるところ）
+         ========================================== -->
+    <section id="schedule" class="section">
+        <div class="section-title">
+            <h2>季節のアトリエ 開催スケジュール</h2>
+        </div>
+        
+        <div class="schedule-box">
+            <div class="schedule-meta">
+                <span class="class-tag">今月のアトリエ</span>
+                <span style="color: var(--secondary); font-weight: 700;"><i class="fa-regular fa-clock"></i> ご予約受付中</span>
+            </div>
+
+            <!-- ★ここから開催スケジュールの書き換えエリア★ -->
+            <div class="schedule-details">
+                <div class="schedule-label">講座名</div>
+                <div class="schedule-value" style="font-weight: 700; font-size: 18px;">季節のアトリエ ｜ 筆文字アート教室</div>
+
+                <div class="schedule-label">開催日</div>
+                <div class="schedule-value" style="font-size: 20px; font-weight: 700; color: var(--primary);">
+                    2026年 8月 23日 (日)
+                </div>
+
+                <div class="schedule-label">時間</div>
+                <div class="schedule-value">9:20 ～ 11:30</div>
+
+                <div class="schedule-label">場所</div>
+                <div class="schedule-value">
+                    <strong>河内長野キタバあやたホール</strong><br>
+                    <span style="font-size: 14px; color: var(--text-muted);">（大阪府河内長野市／初心者歓迎・手ぶらOK）</span>
+                </div>
+
+                <div class="schedule-label">持ち物</div>
+                <div class="schedule-value">特になし（すべての筆ペン、画材は用意しております）</div>
+            </div>
+            <!-- ★ここまで★ -->
+
+            <!-- お申し込みボタン（Googleフォームのリンクに接続） -->
+            <div style="text-align: center;">
+                <!-- ★ここにGoogleフォームのリンクURLを貼り付けてください★ -->
+                <a href="https://forms.gle/xjjyna9SAD54gPz" target="_blank" class="btn">
+                    <i class="fa-regular fa-paper-plane"></i> このアトリエに申し込む
+                </a>
+                <p style="font-size: 12px; color: var(--text-muted); margin-top: 15px;">
+                    ※ご質問やご不安な点がある方は、ページ最下部のお問い合わせフォームより気軽にお送りください。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         公式LINEプレゼントエリア
+         ========================================== -->
+    <section class="section section-alt">
+        <div class="line-section">
+            <div class="line-content">
+                <span class="line-badge">LINE友達登録 特典プレゼント</span>
+                <h3>お家でもすぐ描ける！<br>「簡単描き方動画」と紹介資料</h3>
+                <p>
+                    「筆文字アートに少し興味があるけれど、自分にもできるかな？」という方のために、お家でお手軽に始められる筆ペンの選び方や、身近な画材の紹介資料を無料でお配りしています。
+                </p>
+                
+                <div class="line-gift-box">
+                    <ul>
+                        <li><i class="fa-solid fa-circle-play"></i> 身近なカードにすぐ描ける！お手軽描き方動画</li>
+                        <li><i class="fa-solid fa-file-pdf"></i> これから始める「筆ペン＆画材」選びガイド資料</li>
+                    </ul>
+                </div>
+
+                <!-- 公式LINEへの登録リンク -->
+                <!-- ★ここにLINE友だち追加のURL（https://line.me/R/ti/p/...）を入れてください★ -->
+                <a href="https://line.me" target="_blank" class="btn btn-line">
+                    <i class="fa-brands fa-line"></i> LINE登録でプレゼントを受け取る
+                </a>
+            </div>
+            <div class="line-image">
+                <!-- パステル調の水彩背景イメージ -->
+                <img class="line-art-img" src="http://googleusercontent.com/image_collection/image_retrieval/12602409082380013462_0" alt="筆文字用の筆ペンやパステルの優しいイメージ">
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         【更新エリア】作品・アトリエギャラリー（自分で追加するメイン部分）
+         ========================================== -->
+    <section id="gallery" class="section">
+        <div class="section-title">
+            <h2>作品とアトリエギャラリー</h2>
+            <p style="text-align: center; color: var(--text-muted); font-size: 14px; max-width: 600px; margin: 10px auto 0;">
+                生徒さんたちの素晴らしい筆文字アートや、にぎやかで優しい教室の様子。8月23日のレッスン後、お写真をさらにつなげて並べていきます。
+            </p>
+        </div>
+
+        <div class="concept-container">
+            <!-- ギャラリーの画像 grid -->
+            <div class="gallery-grid">
+                
+                <!-- 【写真の更新】ここからが1つの写真枠です -->
+                <div class="gallery-item">
+                    <div class="gallery-img-wrapper">
+                        <!-- 写真を新しくしたら、src="画像名.jpg" に書き換えます -->
+                        <img src="http://googleusercontent.com/image_collection/image_retrieval/16672272569903727438_0" alt="アトリエに並んだ素敵な筆文字アート作品">
+                    </div>
+                    <div class="gallery-info">
+                        生徒さんの作品展示
+                    </div>
+                </div>
+                <!-- 1つの写真枠 おわり -->
+
+                <!-- 2つめの写真枠 -->
+                <div class="gallery-item">
+                    <div class="gallery-img-wrapper">
+                        <img src="http://googleusercontent.com/image_collection/image_retrieval/18181828935079467888_1" alt="作品を彩るパステルや画材、描く様子の写真">
+                    </div>
+                    <div class="gallery-info">
+                        みんなで描いている温かい時間
+                    </div>
+                </div>
+
+                <!-- 3つめの写真枠 -->
+                <div class="gallery-item">
+                    <div class="gallery-img-wrapper">
+                        <!-- ここにはにしみね先生の作品などを並べます -->
+                        <img src="https://placehold.co/400x300/f7f2ea/8a5e5e?text=Fude+Fuwari+Art" alt="にしみねきよみの筆文字アート作品">
+                    </div>
+                    <div class="gallery-info">
+                        にしみねきよみ作品ギャラリー
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- 将来の拡張性：夢ロゴアートへのメッセージ -->
+            <p style="margin-top: 50px; font-size: 14px; color: var(--text-muted); font-style: italic;">
+                ※将来的に、インストラクター資格を活かした「夢ロゴアート講座」もこちらで順次ご案内できるように、拡張の余白を大切にしながらホームページを運営していきます。
+            </p>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         お問い合わせ（Googleフォーム連携）
+         ========================================== -->
+    <section class="section section-alt">
+        <div class="footer-banner">
+            <h3>アトリエに関するご相談・お問い合わせ</h3>
+            <p>
+                「初めてで筆をうまく動かせるか心配」「日程について相談したい」「介護や家庭の話をしながら少し癒されたい」など、何でも気軽にお問い合わせくださいね。
+            </p>
+            <!-- ★ここにお問い合わせ用のGoogleフォームURLを貼り付けてください★ -->
+            <a href="https://forms.gle/xjjyna9SAD54gPz" target="_blank" class="btn btn-white">
+                <i class="fa-regular fa-envelope"></i> お問い合わせはこちらから
+            </a>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         フッター・SNS連携
+         ========================================== -->
+    <footer>
+        <div class="sns-links">
+            <!-- インスタグラムリンク -->
+            <!-- ★href="ここにインスタのアドレス" を入れます★ -->
+            <a href="https://www.instagram.com/kiyomi.nishimine" target="_blank" class="sns-btn" title="Instagram">
+                <i class="fa-brands fa-instagram"></i>
+            </a>
+            <!-- スレッズ（Threads）リンク -->
+            <!-- ★href="ここにThreadsのアドレス" を入れます★ -->
+            <a href="https://www.threads.net" target="_blank" class="sns-btn" title="Threads">
+                <i class="fa-brands fa-threads"></i>
+            </a>
+            <!-- 公式LINEリンク -->
+            <a href="https://line.me" target="_blank" class="sns-btn" title="LINE">
+                <i class="fa-brands fa-line"></i>
+            </a>
+        </div>
+        <p class="copyright">© 2026 筆ふわり. All Rights Reserved. 主宰: にしみねきよみ</p>
+    </footer>
+
+</body>
+</html>
+```eof
+
+---
+
+### 💻 これからの具体的な進め方
+
+次は、このコードを使って実際にホームページを公開していきましょう。以下の流れで進めるのがお勧めです。
+
+1.  **コードのダウンロードと仮保存**
+    *   上のコードブロック（`index.html`）をコピーして、メモ帳などに貼り付け、ファイル名を「`index.html`」にして保存します。
+2.  **リンクの書き換え（Googleフォームなど）**
+    *   コード内の以下の部分を、先生ご自身のURLに書き換えます。
+        *   アトリエ申込・お問い合わせボタンの `[https://forms.gle/xjjyna9SAD54gPz](https://forms.gle/xjjyna9SAD54gPz)...` を本物のGoogleフォームURLに。
+        *   インスタのリンク `[https://www.instagram.com/kiyomi.nishimine](https://www.instagram.com/kiyomi.nishimine)`
+3.  **GitHubへのアップロード（GitHub Pagesでの公開）**
+    *   GitHubの「リポジトリ（ファイルを置く場所）」に、この `index.html` をアップロードします。
+    *   リポジトリの設定（Settings）から「GitHub Pages」を有効にすると、瞬時にホームページが世界に向けてスマホ・PC両方で公開されます！
+
+まずは「GitHubへコードをアップロードする方法」を1ステップずつご案内しましょうか？それとも、コードの中身で「ここはこういう文章に変えたい」など、内容の修正を先に進めますか？
+
+先生のペースに合わせますので、「次何をするか」お気軽におっしゃってくださいね！
