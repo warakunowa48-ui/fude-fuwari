@@ -1,754 +1,351 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>筆文字アート教室「筆ふわり」 | にしみねきよみ</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-    <style>
-        /* ==========================================
-           共通スタイル & リセット
-           ========================================== */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Noto Sans JP', 'Noto Serif JP', sans-serif;
-            color: #333333;
-            background-color: #fcfbf9; /* 温かみのある生成り色 */
-            line-height: 1.8;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
-
-        img {
-            max-width: 100%;
-            height: auto;
-            vertical-align: middle;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* セクション共通 */
-        section {
-            padding: 80px 0;
-        }
-
-        .section-title {
-            font-family: 'Noto Serif JP', serif;
-            text-align: center;
-            font-size: 2rem;
-            margin-bottom: 50px;
-            position: relative;
-            padding-bottom: 15px;
-            color: #4a3c31;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 2px;
-            background-color: #d4a373; /* アクセントカラー（和の淡いゴールド系） */
-        }
-
-        /* ==========================================
-           ヘッダー
-           ========================================== */
-        header {
-            background-color: rgba(252, 251, 249, 0.95);
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            transition: all 0.3s ease;
-        }
-
-        .header-wrap {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 80px;
-        }
-
-        .logo {
-            font-family: 'Noto Serif JP', serif;
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #4a3c31;
-            letter-spacing: 0.1em;
-        }
-
-        .logo span {
-            font-size: 0.9rem;
-            display: block;
-            font-weight: 400;
-            color: #8b7e74;
-            letter-spacing: 0.05em;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-
-        nav ul li {
-            margin-left: 30px;
-        }
-
-        nav ul li a {
-            font-size: 0.95rem;
-            font-weight: 500;
-            color: #555555;
-            transition: color 0.3s;
-            position: relative;
-            padding: 5px 0;
-        }
-
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 1px;
-            background-color: #d4a373;
-            transition: width 0.3s ease;
-        }
-
-        nav ul li a:hover {
-            color: #d4a373;
-        }
-
-        nav ul li a:hover::after {
-            width: 100%;
-        }
-
-        /* ==========================================
-           メインビジュアル (Hero)
-           ========================================== */
-        .hero {
-            padding-top: 80px; /* ヘッダー分 */
-            background: linear-gradient(135deg, #f7f4ef 0%, #fae8e0 100%);
-            min-height: 85vh;
-            display: flex;
-            align-items: center;
-            overflow: hidden;
-        }
-
-        .hero-wrap {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 40px;
-        }
-
-        .hero-content {
-            flex: 1;
-            max-width: 600px;
-        }
-
-        .hero-sub {
-            font-family: 'Noto Serif JP', serif;
-            font-size: 1.2rem;
-            color: #d4a373;
-            margin-bottom: 15px;
-            font-weight: 500;
-            letter-spacing: 0.1em;
-        }
-
-        .hero-title {
-            font-family: 'Noto Serif JP', serif;
-            font-size: 2.8rem;
-            line-height: 1.4;
-            color: #3d3126;
-            margin-bottom: 25px;
-            font-weight: 700;
-        }
-
-        .hero-text {
-            font-size: 1.05rem;
-            color: #666666;
-            margin-bottom: 35px;
-            利え-spacing: 0.05em;
-        }
-
-        .hero-img {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            position: relative;
-        }
-
-        .hero-img img {
-            width: 85%;
-            max-width: 450px;
-            border-radius: 60% 40% 60% 40% / 40% 50% 50% 60%; /* 柔らかいオーガニック形状 */
-            box-shadow: 0 15px 30px rgba(0,0,0,0.08);
-            border: 8px solid #ffffff;
-            animation: morphing 15s infinite ease-in-out;
-        }
-
-        @keyframes morphing {
-            0% { border-radius: 60% 40% 60% 40% / 40% 50% 50% 60%; }
-            50% { border-radius: 40% 60% 45% 55% / 50% 45% 55% 50%; }
-            100% { border-radius: 60% 40% 60% 40% / 40% 50% 50% 60%; }
-        }
-
-        /* 共通ボタン */
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #d4a373;
-            color: #ffffff;
-            padding: 15px 40px;
-            font-size: 1rem;
-            font-weight: 500;
-            border-radius: 50px;
-            box-shadow: 0 5px 15px rgba(212, 163, 115, 0.3);
-            transition: all 0.3s ease;
-            letter-spacing: 0.05em;
-        }
-
-        .btn i {
-            margin-left: 10px;
-            transition: transform 0.3s;
-        }
-
-        .btn:hover {
-            background-color: #c59262;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(212, 163, 115, 0.4);
-        }
-
-        .btn:hover i {
-            transform: translateX(5px);
-        }
-
-        /* ==========================================
-           コンセプト / 想い
-           ========================================== */
-        .concept {
-            background-color: #ffffff;
-        }
-
-        .concept-wrap {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .concept-lead {
-            font-family: 'Noto Serif JP', serif;
-            font-size: 1.5rem;
-            color: #4a3c31;
-            margin-bottom: 30px;
-            line-height: 1.6;
-        }
-
-        .concept-text {
-            color: #666666;
-            text-align: justify;
-            text-justify: inter-ideograph;
-            margin-bottom: 40px;
-        }
-
-        .concept-text p {
-            margin-bottom: 20px;
-        }
-
-        /* ==========================================
-           ギャラリー（アトリエの様子）
-           ========================================== */
-        .gallery {
-            background-color: #f7f4ef;
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
-        }
-
-        .gallery-item {
-            background-color: #ffffff;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .gallery-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-        }
-
-        .gallery-img-wrap {
-            width: 100%;
-            height: 280px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .gallery-img-wrap img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .gallery-item:hover .gallery-img-wrap img {
-            transform: scale(1.05);
-        }
-
-        .gallery-body {
-            padding: 20px;
-        }
-
-        .gallery-caption {
-            font-size: 0.95rem;
-            color: #555555;
-            font-weight: 500;
-            text-align: center;
-        }
-
-        /* ==========================================
-           プロフィール
-           ========================================== */
-        .profile {
-            background-color: #ffffff;
-        }
-
-        .profile-wrap {
-            display: flex;
-            align-items: center;
-            gap: 60px;
-        }
-
-        .profile-img {
-            flex: 1;
-            max-width: 400px;
-            display: flex;
-            justify-content: center;
-        }
-
-        .profile-img img {
-            width: 100%;
-            border-radius: 16px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-        }
-
-        .profile-content {
-            flex: 1.5;
-        }
-
-        .profile-name {
-            font-family: 'Noto Serif JP', serif;
-            font-size: 1.8rem;
-            color: #3d3126;
-            margin-bottom: 5px;
-            font-weight: 700;
-        }
-
-        .profile-title {
-            font-size: 0.95rem;
-            color: #d4a373;
-            margin-bottom: 25px;
-            font-weight: 500;
-        }
-
-        .profile-text p {
-            margin-bottom: 15px;
-            color: #555555;
-        }
-
-        /* ==========================================
-           教室案内 & 開催場所
-           ========================================== */
-        .info {
-            background-color: #fcfbf9;
-        }
-
-        .info-cards {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 40px;
-            margin-bottom: 50px;
-        }
-
-        .info-card {
-            background-color: #ffffff;
-            padding: 40px;
-            border-radius: 16px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
-            border: 1px solid #f2ede4;
-        }
-
-        .card-title {
-            font-family: 'Noto Serif JP', serif;
-            font-size: 1.3rem;
-            color: #4a3c31;
-            margin-bottom: 25px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .card-title i {
-            color: #d4a373;
-        }
-
-        .info-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .info-table tr {
-            border-bottom: 1px solid #f5f0e8;
-        }
-
-        .info-table tr:last-child {
-            border-bottom: none;
-        }
-
-        .info-table th, .info-table td {
-            padding: 15px 0;
-            text-align: left;
-            vertical-align: top;
-        }
-
-        .info-table th {
-            width: 30%;
-            font-weight: 500;
-            color: #776b5d;
-        }
-
-        .info-table td {
-            color: #444444;
-        }
-
-        .map-wrap {
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
-            border: 1px solid #f2ede4;
-        }
-
-        /* ==========================================
-           コンタクト / お問い合わせ誘引
-           ========================================== */
-        .cta {
-            background: linear-gradient(135deg, #fae8e0 0%, #f7f4ef 100%);
-            text-align: center;
-        }
-
-        .cta-wrap {
-            max-width: 650px;
-            margin: 0 auto;
-        }
-
-        .cta-text {
-            font-size: 1.1rem;
-            color: #4a3c31;
-            margin-bottom: 35px;
-            font-weight: 500;
-        }
-
-        /* ==========================================
-           フッター
-           ========================================== */
-        footer {
-            background-color: #3d3126;
-            color: #ffffff;
-            padding: 40px 0 20px;
-            font-size: 0.9rem;
-        }
-
-        .footer-wrap {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-        }
-
-        .footer-logo {
-            font-family: 'Noto Serif JP', serif;
-            font-size: 1.3rem;
-            letter-spacing: 0.1em;
-        }
-
-        .footer-sns {
-            display: flex;
-            gap: 20px;
-        }
-
-        .footer-sns a {
-            width: 40px;
-            height: 40px;
-            background-color: rgba(255,255,255,0.08);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-        }
-
-        .footer-sns a:hover {
-            background-color: #d4a373;
-            transform: translateY(-3px);
-        }
-
-        .copyright {
-            text-align: center;
-            color: #a89f96;
-            font-size: 0.8rem;
-            border-top: 1px solid rgba(255,255,255,0.05);
-            padding-top: 20px;
-        }
-
-        /* ==========================================
-           レスポンシブ (スマホ対応)
-           ========================================== */
-        @media (max-width: 992px) {
-            .hero-wrap, .profile-wrap {
-                flex-direction: column;
-                text-align: center;
-            }
-            .hero-content, .profile-content {
-                max-width: 100%;
-            }
-            .gallery-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .info-cards {
-                grid-template-columns: 1fr;
-            }
-            .concept-text {
-                text-align: left;
-            }
-        }
-
-        @media (max-width: 768px) {
-            header {
-                position: static;
-            }
-            .header-wrap {
-                flex-direction: column;
-                height: auto;
-                padding: 15px 0;
-                gap: 15px;
-            }
-            nav ul li {
-                margin: 0 10px;
-            }
-            .hero {
-                padding-top: 20px;
-                min-height: auto;
-                padding-bottom: 60px;
-            }
-            .hero-title {
-                font-size: 2rem;
-            }
-            .gallery-grid {
-                grid-template-columns: 1fr;
-            }
-            .footer-wrap {
-                flex-direction: column;
-                gap: 20px;
-            }
-            section {
-                padding: 60px 0;
-            }
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>筆ふわり｜季節のアトリエ｜河内長野の筆文字アート教室</title>
+  <meta name="description" content="河内長野の筆文字アート教室「筆ふわり」。季節の花や木々、行事などをモチーフに、筆文字と透明水彩を楽しむ少人数の教室です。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --ink:#463b35;
+      --sub:#756a64;
+      --bg:#fdfbf8;
+      --paper:#fffefc;
+      --pink:#d7a69d;
+      --pink-dark:#bd8177;
+      --rose:#f6e9e5;
+      --beige:#f5f0e9;
+      --green:#9baa8c;
+      --line:#ebe3db;
+      --shadow:0 18px 45px rgba(84,65,55,.10);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:"Noto Sans JP",sans-serif;
+      color:var(--ink);
+      background:var(--bg);
+      line-height:1.9;
+      -webkit-font-smoothing:antialiased;
+    }
+    img{display:block;max-width:100%;height:auto}
+    a{text-decoration:none;color:inherit}
+    .container{width:min(1120px,calc(100% - 40px));margin:auto}
+    .narrow{width:min(820px,calc(100% - 40px));margin:auto}
+    section{padding:88px 0}
+    .eyebrow{font-size:.84rem;letter-spacing:.18em;color:var(--pink-dark);font-weight:500}
+    h1,h2,h3{font-family:"Noto Serif JP",serif;font-weight:600;letter-spacing:.04em}
+    h2{font-size:clamp(1.75rem,3vw,2.25rem);text-align:center;margin:0 0 38px}
+    .section-intro{text-align:center;color:var(--sub);margin:-18px auto 42px;max-width:760px}
+    .button{
+      display:inline-flex;align-items:center;justify-content:center;
+      padding:15px 30px;border-radius:999px;background:var(--pink);
+      color:white;font-weight:500;box-shadow:0 10px 25px rgba(189,129,119,.24);
+      transition:.25s ease;
+    }
+    .button:hover{background:var(--pink-dark);transform:translateY(-2px)}
+    .button.secondary{background:white;color:var(--pink-dark);border:1px solid var(--pink)}
+    header{
+      position:sticky;top:0;z-index:20;background:rgba(253,251,248,.94);
+      backdrop-filter:blur(10px);border-bottom:1px solid rgba(235,227,219,.75)
+    }
+    .header-inner{min-height:72px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+    .brand{font-family:"Noto Serif JP",serif;font-size:1.32rem;font-weight:700;letter-spacing:.12em}
+    .brand small{display:block;font-family:"Noto Sans JP",sans-serif;font-size:.7rem;font-weight:400;color:var(--sub);letter-spacing:.05em}
+    nav{display:flex;gap:22px;font-size:.88rem;color:#655b55}
+    .hero{padding:54px 0 72px;background:linear-gradient(135deg,#fbf7f2 0%,#f8e9e6 100%)}
+    .hero-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:54px;align-items:center}
+    .hero h1{font-size:clamp(2.2rem,5vw,3.35rem);line-height:1.48;margin:12px 0 16px}
+    .hero-sub{font-family:"Noto Serif JP",serif;font-size:1.15rem;color:#6f5c53;margin:0 0 22px}
+    .hero-text{color:var(--sub);max-width:540px;margin:0 0 28px}
+    .hero-note{font-size:.84rem;color:#7a6d65;margin-top:14px}
+    .hero-photo{position:relative}
+    .hero-photo img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:22px;box-shadow:var(--shadow)}
+    .hero-photo:after{content:"";position:absolute;inset:14px -14px -14px 14px;border:1px solid rgba(215,166,157,.5);border-radius:22px;z-index:-1}
+    .about{background:var(--paper)}
+    .about-copy p{margin:0 0 18px;color:var(--sub)}
+    .about-lead{font-family:"Noto Serif JP",serif;font-size:1.3rem;text-align:center;color:var(--ink)!important;margin-bottom:28px!important}
+    .three-points{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:46px}
+    .point{background:var(--beige);border-radius:18px;padding:30px 24px}
+    .point-num{font-family:"Noto Serif JP",serif;color:var(--pink-dark);font-size:1.05rem}
+    .point h3{margin:8px 0 12px;font-size:1.2rem}
+    .point p{margin:0;color:var(--sub);font-size:.94rem}
+    .experience{background:var(--rose)}
+    .experience-box{background:rgba(255,255,255,.72);border-radius:20px;padding:40px}
+    .experience-box p{color:var(--sub);margin:0 0 17px}
+    .highlight{font-family:"Noto Serif JP",serif;text-align:center;font-size:1.2rem;color:#66534b;padding:25px 0}
+    .gallery{background:var(--beige)}
+    .gallery-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+    .gallery-card{background:white;border-radius:14px;overflow:hidden;box-shadow:0 5px 18px rgba(72,56,48,.06)}
+    .gallery-card img{width:100%;aspect-ratio:4/5;object-fit:cover}
+    .gallery-card.wide img{aspect-ratio:4/3}
+    .gallery-card p{margin:0;padding:13px 14px;text-align:center;color:#6d625c;font-size:.86rem}
+    .lesson{background:var(--paper)}
+    .lesson-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+    .card{background:white;border:1px solid var(--line);border-radius:18px;padding:30px;box-shadow:0 6px 20px rgba(75,58,49,.04)}
+    .card h3{margin:0 0 19px;font-size:1.3rem}
+    dl{margin:0}
+    .row{display:grid;grid-template-columns:112px 1fr;gap:14px;padding:13px 0;border-bottom:1px solid #f0eae4}
+    .row:last-child{border-bottom:none}
+    dt{color:#786d66;font-weight:500}
+    dd{margin:0;color:#4f4844}
+    .small-note{font-size:.88rem;color:var(--sub);margin-top:18px}
+    .profile{background:var(--beige)}
+    .profile-grid{display:grid;grid-template-columns:.72fr 1.28fr;gap:50px;align-items:center}
+    .profile img{border-radius:18px;box-shadow:var(--shadow)}
+    .profile h2{text-align:left;margin-bottom:20px}
+    .profile h3{font-size:1.55rem;margin:0 0 3px}
+    .profile-role{color:var(--pink-dark);margin:0 0 20px}
+    .profile p{color:var(--sub);margin:0 0 14px}
+    .faq{background:var(--paper)}
+    details{max-width:860px;margin:0 auto 14px;background:white;border:1px solid var(--line);border-radius:14px;padding:18px 22px}
+    summary{cursor:pointer;font-weight:600;color:var(--ink)}
+    details p{margin:13px 0 0;color:var(--sub)}
+    .connect{background:linear-gradient(135deg,#f7ebe7 0%,#f5f0e9 100%)}
+    .connect-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+    .social{background:rgba(255,255,255,.8);border-radius:18px;padding:28px;text-align:center}
+    .social h3{margin:0 0 12px}
+    .social p{color:var(--sub);font-size:.92rem;margin:0 0 18px}
+    .cta{text-align:center;background:var(--paper)}
+    .cta p{color:var(--sub);margin:0 auto 28px;max-width:680px}
+    .closing{padding:45px 20px;text-align:center;background:var(--beige);font-family:"Noto Serif JP",serif;font-size:1.15rem;color:#6a5950}
+    footer{background:#40342b;color:white;padding:32px 0 18px}
+    .footer-inner{display:flex;justify-content:space-between;align-items:center;gap:20px}
+    .copyright{text-align:center;color:#bcb2aa;font-size:.78rem;border-top:1px solid rgba(255,255,255,.1);margin-top:22px;padding-top:16px}
+    @media(max-width:900px){
+      nav{display:none}
+      .hero-grid,.profile-grid,.lesson-grid{grid-template-columns:1fr}
+      .hero-copy{text-align:center}
+      .hero-text{margin-left:auto;margin-right:auto}
+      .hero-photo{max-width:680px;margin:auto}
+      .three-points{grid-template-columns:1fr}
+      .gallery-grid{grid-template-columns:repeat(2,1fr)}
+      .connect-grid{grid-template-columns:1fr}
+      .profile h2{text-align:center}
+    }
+    @media(max-width:700px){.classroom .gallery-grid{grid-template-columns:1fr!important}}
+    @media(max-width:580px){
+      section{padding:64px 0}
+      .container,.narrow{width:min(100% - 28px,1120px)}
+      .hero{padding-top:38px}
+      .hero h1{font-size:2rem}
+      .gallery-grid{gap:12px}
+      .gallery-card p{font-size:.78rem;padding:10px 8px}
+      .experience-box,.card{padding:24px 20px}
+      .row{grid-template-columns:88px 1fr;font-size:.9rem}
+      .footer-inner{flex-direction:column}
+    }
+  </style>
 </head>
 <body>
+<header>
+  <div class="container header-inner">
+    <a class="brand" href="#top">筆ふわり<small>にしみねきよみ｜筆文字アート教室</small></a>
+    <nav>
+      <a href="#about">季節のアトリエ</a>
+      <a href="#gallery">作品</a>
+      <a href="#lesson">レッスン案内</a>
+      <a href="#profile">講師紹介</a>
+      <a href="#connect">つながる</a>
+    </nav>
+  </div>
+</header>
 
-    <header>
-        <div class="container header-wrap">
-            <div class="logo">
-                筆ふわり
-                <span>にしみねきよみ 筆文字アート教室</span>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="#concept">想い</a></li>
-                    <li><a href="#gallery">アトリエの様子</a></li>
-                    <li><a href="#profile">講師紹介</a></li>
-                    <li><a href="#info">教室案内</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+<main id="top">
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">筆文字アート教室「筆ふわり」｜季節のアトリエ</p>
+        <h1>忙しい毎日に、<br>心がふわりとほどけるひと時を。</h1>
+        <p class="hero-sub">季節を描き、自分を大切にする暮らしへ。</p>
+        <p class="hero-text">季節の花や木々、行事などをモチーフに、筆文字と透明水彩で作品を描く少人数の教室です。</p>
+        <a class="button" href="https://forms.gle/xjjyna9SAD54gPzw7" target="_blank" rel="noopener">レッスンのお申し込み・お問い合わせ</a>
+        <p class="hero-note">2026年12月まで期間限定価格 1,800円｜2027年1月より3,000円</p>
+      </div>
+      <div class="hero-photo">
+        <img src="top.jpg" alt="筆ふわりで描いた季節の作品">
+      </div>
+    </div>
+  </section>
 
-    <main>
-        <section class="hero">
-            <div class="container hero-wrap">
-                <div class="hero-content">
-                    <p class="hero-sub">心を整える、私だけのひと時</p>
-                    <h1 class="hero-title">忙しい毎日に<br>ふっと心がゆるむ<br>筆文字アート</h1>
-                    <p class="hero-text">
-                        ルールにとらわれず、のびのびと自分の「好き」を描く。きれいな字を書くことだけが目的ではありません。色筆ペンや水彩を使い、手と心を動かして自分を労わるやさしい時間を、ここからはじめてみませんか？
-                    </p>
-                    <a href="https://forms.gle/xjjyna9SAD54gPzw7" target="_blank" class="btn">体験予約・お問い合わせ <i class="fa-solid fa-chevron-right"></i></a>
-                </div>
-                <div class="hero-img">
-                    <img src="20240512-N-015.jpg" alt="筆文字アートを描く手元">
-                </div>
-            </div>
-        </section>
+  <section id="about" class="about">
+    <div class="narrow about-copy">
+      <h2>季節のアトリエとは</h2>
+      <p class="about-lead">筆文字アートを通して、季節を楽しむ教室です。</p>
+      <p>季節の花や木々、行事などをモチーフに、筆文字と透明水彩で作品を描きます。</p>
+      <p>春には桜やおひなさま。夏には金魚やくらげ。秋には実りや紅葉。冬にはクリスマスやお正月。</p>
+      <p>毎月違う季節を描くので、「今月は何を描くのかな。」そんな楽しみも、季節のアトリエの魅力です。</p>
+      <p>上手に描くことだけを目的にするのではなく、季節を感じながら、夢中になって筆を動かす時間そのものも大切にしています。</p>
+    </div>
+    <div class="container three-points">
+      <article class="point">
+        <span class="point-num">01</span>
+        <h3>はじめての方も安心</h3>
+        <p>一つひとつ順を追ってお伝えします。今は、まねるところから始めて、少しずつ筆や色に親しんでいきます。</p>
+      </article>
+      <article class="point">
+        <span class="point-num">02</span>
+        <h3>透明水彩のにじみを楽しむ</h3>
+        <p>水の量や色の重なりによって生まれる、透明水彩ならではのやさしい表情を楽しみます。</p>
+      </article>
+      <article class="point">
+        <span class="point-num">03</span>
+        <h3>自分だけの作品に</h3>
+        <p>同じテーマを描いても、色や筆の動きによって一枚ずつ違う作品になります。講座では2〜3枚描くこともあります。</p>
+      </article>
+    </div>
+  </section>
 
-        <section id="concept" class="concept">
-            <div class="container concept-wrap">
-                <h2 class="section-title">季節を描き、自分を労う</h2>
-                <p class="concept-lead">介護10年を経て辿り着いた<br>心が軽くなる筆文字アート</p>
-                <div class="concept-text">
-                    <p>誰かのために一生懸命なときほど、自分のことは後回しになりがちです。私自身、10年間の介護生活の中で、ふと自分を見失いそうになる瞬間が何度もありました。そんな時に出会ったのが、この筆文字アートです。</p>
-                    <p>真っ白なハガキに向かい、お気に入りの色をのせ、筆を滑らせる。ただそれだけの時間が、ざわついていた心をすーっと穏やかに整え、再び前を向く元気をくれました。</p>
-                    <p>「筆ふわり」は、上手く書くための場所ではありません。日々の忙しさから少しだけ離れて、ご自身の心に寄り添い、ふわりと軽くなれる特別なひと時をお届けします。</p>
-                </div>
-            </div>
-        </section>
+  <section class="experience">
+    <div class="narrow experience-box">
+      <h2>教室で過ごす時間</h2>
+      <p>季節を感じながら、筆文字と透明水彩で作品を描いていると、いつの間にか夢中になる時間に。</p>
+      <p class="highlight">透明水彩のにじみの美しさに、思わずうっとりすることも。</p>
+      <p>作品が少しずつ形になる喜びと、「私にも描けた」という嬉しい気持ちを、一緒に味わってみませんか。</p>
+      <p>レッスン終了後は、ご自身の片づけをしてから作品を撮影します。お時間のある方とは、その日に気づいたことを少し言葉にする時間も大切にしています。ご予定のある方は、そのままお帰りいただいて大丈夫です。</p>
+    </div>
+  </section>
 
-        <section id="gallery" class="gallery">
-            <div class="container">
-                <h2 class="section-title">アトリエの様子</h2>
-                <div class="gallery-grid">
-                    <div class="gallery-item">
-                        <div class="gallery-img-wrap">
-                            <img src="S_17530887.jpg" alt="生徒さんの作品1">
-                        </div>
-                        <div class="gallery-body">
-                            <p class="gallery-caption">みんなで持ち寄って笑顔の1枚</p>
-                        </div>
-                    </div>
-                    <div class="gallery-item">
-                        <div class="gallery-img-wrap">
-                            <img src="S_17530886.jpg" alt="生徒さんの作品2">
-                        </div>
-                        <div class="gallery-body">
-                            <p class="gallery-caption">それぞれの個性が光る「ゆらり」</p>
-                        </div>
-                    </div>
-                    <div class="gallery-item">
-                        <div class="gallery-img-wrap">
-                            <img src="S_17530885.jpg" alt="生徒さんの作品3">
-                        </div>
-                        <div class="gallery-body">
-                            <p class="gallery-caption">じっくりと自分に向き合う制作時間</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+  <section id="gallery" class="gallery">
+    <div class="container">
+      <h2>季節を描く作品たち</h2>
+      <p class="section-intro">季節ごとに変わるモチーフを、筆文字と透明水彩で描いています。</p>
+      <div class="gallery-grid">
+        <article class="gallery-card"><img src="gallery-hina.jpg" alt="桃の節句の筆文字アート"><p>桃の節句</p></article>
+        <article class="gallery-card"><img src="gallery-yurari.jpg" alt="金魚の筆文字アート"><p>ゆらり</p></article>
+        <article class="gallery-card"><img src="gallery-kurage.jpg" alt="くらげの筆文字アート"><p>くらげのファミリー</p></article>
+        <article class="gallery-card"><img src="gallery-katatsumuri.jpg" alt="かたつむりの筆文字アート"><p>すこしずつ</p></article>
+        <article class="gallery-card"><img src="gallery-sakura.jpg" alt="桜の筆文字アート"><p>桜の便り</p></article>
+        <article class="gallery-card"><img src="gallery-christmas.jpg" alt="クリスマスの筆文字アート"><p>クリスマス</p></article>
+        <article class="gallery-card"><img src="gallery-setsubun.jpg" alt="節分の筆文字アート"><p>節分</p></article>
+        <article class="gallery-card"><img src="gallery-rainbow.jpg" alt="虹の筆文字アート"><p>あした天気になあれ</p></article>
+      </div>
+    </div>
+  </section>
 
-        <section id="profile" class="profile">
-            <div class="container profile-wrap">
-                <div class="profile-img">
-                    <img src="20240512-N-013.jpg" alt="にしみねきよみ">
-                </div>
-                <div class="profile-content">
-                    <h2 class="section-title" style="text-align: left; padding-bottom: 15px; margin-bottom: 20px;">講師紹介</h2>
-                    <h3 class="profile-name">にしみね きよみ</h3>
-                    <p class="profile-title">筆ふわり主宰 | 季節のアトリエ</p>
-                    <div class="profile-text">
-                        <p>介護経験から生まれた、心を整える筆文字アート教室「筆ふわり」を運営。</p>
-                        <p>「私にはセンスがないから…」「字が下手だから…」と心配される方こそ、ぜひいらしてください。従来の枠にとらわれない自由な表現で、どなたでも驚くほど素敵なアートを描くことができます。</p>
-                        <p>南大阪・河内長野市を中心に、少人数でアットホームなワークショップを定期開催中。皆さまと温かい時間を共有できるのを楽しみにしております。</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+  <section class="classroom" style="background:var(--paper)">
+    <div class="container">
+      <h2>教室の様子</h2>
+      <p class="section-intro">少人数で、筆や色とゆっくり向き合います。作品が完成したあとは、みんなで眺めたり、撮影したりする時間も楽しんでいます。</p>
+      <div class="gallery-grid" style="grid-template-columns:repeat(3,1fr)">
+        <article class="gallery-card wide">
+          <img src="S_17530885.jpg" alt="筆ふわりのレッスンで作品を描く手元">
+          <p>一つひとつ、ゆっくりと</p>
+        </article>
+        <article class="gallery-card wide">
+          <img src="S_17530886.jpg" alt="完成した作品を手にする教室の様子">
+          <p>完成した作品と一緒に</p>
+        </article>
+        <article class="gallery-card wide">
+          <img src="S_17530887.jpg" alt="透明水彩で作品を描いている様子">
+          <p>色のにじみを楽しみながら</p>
+        </article>
+      </div>
+    </div>
+  </section>
 
-        <section id="info" class="info">
-            <div class="container">
-                <h2 class="section-title">教室案内</h2>
-                <div class="info-cards">
-                    <div class="info-card">
-                        <h3 class="card-title"><i class="fa-solid fa-circle-info"></i> レッスン概要</h3>
-                        <table class="info-table">
-                            <tr>
-                                <th>対象</th>
-                                <td>初心者歓迎（手ぶらでご参加いただけます）</td>
-                            </tr>
-                            <tr>
-                                <th>次回日程</th>
-                                <td>8月23日（日） 9:20〜</td>
-                            </tr>
-                            <tr>
-                                <th>開催場所</th>
-                                <td>河内長野キタバあやたホール（コミュニティセンターあやた）</td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="info-card">
-                        <h3 class="card-title"><i class="fa-solid fa-map-location-dot"></i> 開催場所アクセス</h3>
-                        <table class="info-table">
-                            <tr>
-                                <th>住所</th>
-                                <td>〒586-0077 大阪府河内長野市東綾た町7-1</td>
-                            </tr>
-                            <tr>
-                                <th>交通</th>
-                                <td>駐車場あり（お車でお越しいただけます）</td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-                
-                <div class="map-wrap">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3291.2407421326444!2d135.56846177636603!3d34.42051659744158!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6000d0a2f4a3bfcf%3A0xe96c429ff703f0b2!2z44CSNTg2LTAwNzcg5aSn6Ziq5bqc5rKz5YaF6ZW36YeO5biC5p2x57a-55Sw55S6Ny0x!5e0!3m2!1sja!2sjp!4v1710000000000!5m2!1sja!2sjp" width="100%" height="380" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                </div>
-            </div>
-        </section>
+  <section id="lesson" class="lesson">
+    <div class="container">
+      <h2>レッスンのご案内</h2>
+      <p class="section-intro">少人数で、一人ひとりのペースを大切にしながら、季節の作品づくりを楽しんでいます。</p>
+      <div class="lesson-grid">
+        <article class="card">
+          <h3>季節のアトリエ</h3>
+          <dl>
+            <div class="row"><dt>開催</dt><dd>毎月1回<br>開催日は最新のご案内をご覧ください</dd></div>
+            <div class="row"><dt>所要時間</dt><dd>約2時間30分</dd></div>
+            <div class="row"><dt>料金</dt><dd>2026年12月まで 1,800円<br>2027年1月より 3,000円</dd></div>
+            <div class="row"><dt>道具</dt><dd>初めてご参加の方には、道具をご用意しています</dd></div>
+            <div class="row"><dt>継続後</dt><dd>おすすめ画材をご案内しています</dd></div>
+            <div class="row"><dt>お支払い</dt><dd>開催日の1週間前までに銀行振込</dd></div>
+          </dl>
+          <p class="small-note">お申し込み後に、振込先などの詳細をご案内します。今年は初回限定ではなく、何度ご参加いただいても期間限定価格です。</p>
+        </article>
+        <article class="card">
+          <h3>開催場所</h3>
+          <dl>
+            <div class="row"><dt>会場</dt><dd>キタバあやたホール</dd></div>
+            <div class="row"><dt>住所</dt><dd>〒586-0094<br>大阪府河内長野市小山田町1824-4</dd></div>
+            <div class="row"><dt>交通</dt><dd>南海バス「東峯」下車 徒歩約3分</dd></div>
+            <div class="row"><dt>駐車場</dt><dd>あり</dd></div>
+          </dl>
+          <p class="small-note"><a href="https://www.google.com/maps/search/?api=1&query=%E3%82%AD%E3%82%BF%E3%83%90%E3%81%82%E3%82%84%E3%81%9F%E3%83%9B%E3%83%BC%E3%83%AB" target="_blank" rel="noopener" style="color:var(--pink-dark);border-bottom:1px solid var(--pink)">Googleマップで見る</a></p>
+        </article>
+      </div>
+    </div>
+  </section>
 
-        <section class="cta">
-            <div class="container cta-wrap">
-                <h2 class="section-title">まずはお気軽に体験してみませんか？</h2>
-                <p class="cta-text">道具はすべてこちらでご用意しております。手ぶらでふらっと、心地よい時間を過ごしにいらしてくださいね。</p>
-                <a href="https://forms.gle/xjjyna9SAD54gPzw7" target="_blank" class="btn">体験レッスンを予約する <i class="fa-solid fa-paper-plane"></i></a>
-            </div>
-        </section>
-    </main>
+  <section id="profile" class="profile">
+    <div class="container profile-grid">
+      <div><img src="20240512-N-013.jpg" alt="筆ふわり主宰 にしみねきよみ"></div>
+      <div>
+        <h2>はじめまして</h2>
+        <h3>にしみね きよみ</h3>
+        <p class="profile-role">筆ふわり主宰｜筆文字アート講師</p>
+        <p>以前の私は、「絵は苦手」と思っていました。</p>
+        <p>そんな私が出会ったのが、筆文字と透明水彩を組み合わせた筆文字アートです。季節を描く楽しさや、透明水彩のやさしいにじみに魅了されました。</p>
+        <p>また、10年間の母の介護を経験したことで、忙しい毎日の中でも、自分を大切にする時間の大切さを実感しました。</p>
+        <p>だからこそ、この教室では作品を完成させることだけでなく、季節を感じながら、夢中になって筆を動かす時間も大切にしています。</p>
+        <p>初めての方にも安心して楽しんでいただけるよう、一人ひとりのペースを大切にしながらお伝えしています。</p>
+      </div>
+    </div>
+  </section>
 
-    <footer>
-        <div class="container">
-            <div class="footer-wrap">
-                <div class="footer-logo">
-                    筆ふわり
-                </div>
-                <div class="footer-sns">
-                    <a href="https://www.instagram.com/kiyomi.nishimine" target="_blank" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-                </div>
-            </div>
-            <div class="copyright">
-                &copy; 2026 筆ふわり All Rights Reserved.
-            </div>
-        </div>
-    </footer>
+  <section class="faq">
+    <div class="container">
+      <h2>よくある質問</h2>
+      <details><summary>絵が苦手でも大丈夫ですか？</summary><p>はい。初めての方にも楽しんでいただけるよう、一つひとつ丁寧にお伝えしています。</p></details>
+      <details><summary>一人で参加しても大丈夫ですか？</summary><p>もちろんです。お一人で参加される方も多く、少人数でゆったりとした雰囲気の教室です。</p></details>
+      <details><summary>道具は必要ですか？</summary><p>初めてご参加の方には、道具をご用意しています。継続される方には、おすすめ画材をご案内しています。</p></details>
+      <details><summary>毎月同じ内容ですか？</summary><p>いいえ。季節の花や木々、行事などをモチーフに、毎月違う作品を楽しんでいただけます。</p></details>
+    </div>
+  </section>
 
+  <section id="connect" class="connect">
+    <div class="container">
+      <h2>筆ふわりとつながる</h2>
+      <p class="section-intro">教室に来る前にも、作品や日々の言葉を通して「筆ふわり」の雰囲気を感じていただけます。</p>
+      <div class="connect-grid">
+        <article class="social">
+          <h3>Instagram</h3>
+          <p>季節の作品や教室の様子、レッスン情報をご紹介しています。</p>
+          <a class="button secondary" href="https://www.instagram.com/kiyomi.nishimine" target="_blank" rel="noopener">Instagramを見る</a>
+        </article>
+        <article class="social">
+          <h3>Threads</h3>
+          <p>介護を通して感じたことや日々の気づき、教室づくりのことなどを綴っています。</p>
+          <a class="button secondary" href="https://www.threads.com/@kiyomi.nishimine?igshid=NTc4MTIwNjQ2YQ==" target="_blank" rel="noopener">Threadsを見る</a>
+        </article>
+        <article class="social">
+          <h3>公式LINE</h3>
+          <p>講座のご案内やお問い合わせのほか、初めての方向けのおすすめ画材と、簡単な描き方動画を登録特典としてお届けしています。</p>
+          <a class="button secondary" href="https://lin.ee/QKern9s" target="_blank" rel="noopener">公式LINEに登録する</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="narrow">
+      <h2>季節のアトリエで、お待ちしています</h2>
+      <p>忙しい毎日の中で、ほんの少しだけ自分のために筆を持つ時間。初めての方も、どうぞ安心してお越しください。</p>
+      <a class="button" href="https://forms.gle/xjjyna9SAD54gPzw7" target="_blank" rel="noopener">レッスンのお申し込み・お問い合わせ</a>
+    </div>
+  </section>
+
+  <div class="closing">季節を描く時間が、毎日を少しやさしくしてくれますように。</div>
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <div class="brand">筆ふわり<small>季節のアトリエ</small></div>
+    <div>河内長野の筆文字アート教室</div>
+  </div>
+  <div class="container copyright">© 2026 筆ふわり All Rights Reserved.</div>
+</footer>
 </body>
 </html>
