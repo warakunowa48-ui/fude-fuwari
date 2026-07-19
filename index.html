@@ -43,6 +43,7 @@
     h2{font-size:clamp(1.75rem,3vw,2.25rem);text-align:center;margin:0 0 38px}
     .section-intro{text-align:center;color:var(--sub);font-weight:400;margin:-18px auto 42px;max-width:760px;line-height:2}
     .pc-only{display:inline}.sp-only{display:none}
+    .nowrap{white-space:nowrap}
     .hero-title-pc{display:block}.hero-title-sp{display:none}
     .button{
       display:inline-flex;align-items:center;justify-content:center;
@@ -305,9 +306,9 @@ px;align-items:center}
         <h1 class="hero-title-pc">忙しい毎日に、<br>心がふわりとほどけるひと時を。</h1>
         <h1 class="hero-title-sp">忙しい毎日に、<br>心がふわりと<br>ほどけるひと時を。</h1>
         <p class="hero-sub">季節を描き、<br class="sp-only">自分を大切にする暮らしへ。</p>
-        <p class="hero-text">季節の花や木々、行事などをモチーフに、筆文字と透明水彩で作品を描く少人数の教室です。</p>
+        <p class="hero-text">季節の花や木々、行事などをモチーフに、筆文字と透明水彩で作品を描く少人数の<span class="nowrap">教室</span>です。</p>
         <a class="button" href="https://forms.gle/KGzYxqAbrXPVV3xv6" target="_blank" rel="noopener">レッスンのお申込み</a>
-        <p class="hero-note">2026年12月まで期間限定価格 1,800円｜2027年1月より3,000円</p>
+        <p class="hero-note">2026年12月まで期間限定価格 1,800円<span class="pc-only">｜</span><br class="sp-only">2027年1月より<span class="nowrap">3,000円</span></p>
       </div>
       <div class="hero-photo">
         <img src="top.jpg" alt="筆ふわりで描いた季節の作品">
@@ -318,9 +319,9 @@ px;align-items:center}
   <section id="about" class="about">
     <div class="narrow about-copy">
       <h2>季節のアトリエとは</h2>
-      <p class="about-lead">筆文字アートを通して、季節を楽しむ教室です。</p>
-      <p>季節の花や木々、行事などをモチーフに、筆文字と透明水彩で作品を描きます。</p>
-      <p>春には桜やおひなさま。夏には金魚やくらげ。秋には実りや紅葉。冬にはクリスマスやお正月。</p>
+      <p class="about-lead">筆文字アートを通して、季節を<span class="nowrap">楽しむ</span>教室です。</p>
+      <p>季節の花や木々、行事などをモチーフに、筆文字と透明水彩で作品を<span class="nowrap">描きます。</span></p>
+      <p>春には桜やおひなさま。夏には金魚や<span class="nowrap">くらげ</span>。秋には実りや紅葉。冬には<span class="nowrap">クリスマス</span>やお正月。</p>
       <p>毎月違う季節を描くので、「今月は何を描くのかな。」そんな楽しみも、季節のアトリエの魅力です。</p>
       <p>上手に描くことだけを目的にするのではなく、季節を感じながら、夢中になって筆を動かす時間そのものも大切にしています。</p>
     </div>
@@ -380,7 +381,7 @@ px;align-items:center}
   <section class="classroom" style="background:var(--paper)">
     <div class="container">
       <h2>教室の様子</h2>
-      <p class="section-intro">少人数で、筆や色とゆっくり向き合います。作品が完成したあとは、みんなで眺めたり、撮影したりする時間も楽しんでいます。</p>
+      <p class="section-intro">少人数で、筆や色とゆっくり向き合います。作品が完成したあとは、みんなで眺めたり、撮影したりする時間も<span class="nowrap">楽しんでいます。</span></p>
       <div class="gallery-grid" style="grid-template-columns:repeat(3,1fr)">
         <article class="gallery-card wide">
           <img src="S_17530885.jpg" alt="筆ふわりのレッスンで作品を描く手元">
@@ -401,14 +402,14 @@ px;align-items:center}
   <section id="lesson" class="lesson">
     <div class="container">
       <h2>レッスンのご案内</h2>
-      <p class="section-intro">少人数で、一人ひとりのペースを大切にしながら、季節の作品づくりを楽しんでいます。</p>
+      <p class="section-intro">少人数で、一人ひとりのペースを大切にしながら、季節の作品づくりを<span class="nowrap">楽しんでいます。</span></p>
       <div class="lesson-grid">
         <article class="card">
           <h3>季節のアトリエ</h3>
           <dl>
             <div class="row"><dt>開催</dt><dd>毎月1回<br>開催日は最新のご案内をご覧ください</dd></div>
             <div class="row"><dt>所要時間</dt><dd>約2時間30分</dd></div>
-            <div class="row"><dt>料金</dt><dd>2026年12月まで 1,800円<br>2027年1月より 3,000円</dd></div>
+            <div class="row"><dt>料金</dt><dd>2026年12月まで 1,800円<br>2027年1月より <span class="nowrap">3,000円</span></dd></div>
             <div class="row"><dt>道具</dt><dd>初めてご参加の方には、道具をご用意しています</dd></div>
             <div class="row"><dt>継続後</dt><dd>おすすめ画材をご案内しています</dd></div>
             <div class="row"><dt>お支払い</dt><dd>Googleフォームからお申込み後、振込口座をご案内します。開催日の1週間前までにお振込みください。</dd></div>
@@ -488,8 +489,8 @@ px;align-items:center}
 
   <section class="cta">
     <div class="narrow">
-      <h2>季節のアトリエで、<br class="sp-only">お待ちしています</h2>
-      <p>忙しい毎日の中で、ほんの少しだけ自分のために筆を持つ時間。<br class="pc-only">初めての方も、手ぶらで安心してお越しください。</p>
+      <h2>季節の<br class="sp-only">アトリエで、<br class="sp-only">お待ちしています</h2>
+      <p>忙しい毎日の中で、ほんの少しだけ自分のために筆を持つ時間。<br class="pc-only">初めての方も、<br class="sp-only"><span class="nowrap">手ぶらで</span>安心してお越しください。</p>
       <a class="button" href="https://forms.gle/KGzYxqAbrXPVV3xv6" target="_blank" rel="noopener">レッスンのお申込み</a>
     </div>
   </section>
