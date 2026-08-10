@@ -144,6 +144,12 @@ px;align-items:center}
     .profile h3{font-size:1.55rem;margin:0 0 3px}
     .profile-role{color:var(--pink-dark);margin:0 0 20px}
     .profile p{color:var(--sub);margin:0 0 14px;line-height:2}
+    .testimonials{background:var(--rose)}
+    .testimonial-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+    .testimonial{background:rgba(255,255,255,.85);border-radius:20px;padding:32px 28px;box-shadow:var(--shadow);display:flex;flex-direction:column}
+    .testimonial-quote{color:var(--pink-dark);font-family:"Noto Serif JP",serif;font-size:1.6rem;line-height:1;margin-bottom:8px}
+    .testimonial p{color:var(--sub);font-size:.94rem;line-height:1.95;margin:0 0 20px;flex-grow:1}
+    .testimonial-name{font-family:"Noto Serif JP",serif;font-size:.92rem;color:var(--ink);text-align:right;margin:0}
     .faq{background:var(--paper)}
     details{max-width:860px;margin:0 auto 14px;background:white;border:1px solid var(--line);border-radius:14px;padding:18px 22px}
     summary{cursor:pointer;font-weight:600;color:var(--ink)}
@@ -178,6 +184,7 @@ px;align-items:center}
       .three-points{grid-template-columns:1fr}
       .gallery-grid{grid-template-columns:repeat(2,1fr)}
       .connect-grid{grid-template-columns:1fr}
+      .testimonial-grid{grid-template-columns:1fr}
       .profile h2{text-align:center}
     }
     @media(max-width:700px){.classroom .gallery-grid{grid-template-columns:1fr!important}}
@@ -325,6 +332,7 @@ px;align-items:center}
       <a href="#gallery">作品</a>
       <a href="#lesson">レッスン案内</a>
       <a href="#profile">講師紹介</a>
+      <a href="#testimonials">生徒の声</a>
       <a href="#connect">つながる</a>
     </nav>
   </div>
@@ -481,6 +489,30 @@ px;align-items:center}
         <p>また、10年間の母の介護を経験したことで、忙しい毎日の中でも、自分を大切にする時間の<span class="nowrap">大切さ</span>を実感しました。</p>
         <p>だからこそ、この教室では作品を完成させることだけでなく、季節を感じながら、<span class="nowrap">夢中になって</span>筆を動かす時間も大切にしています。</p>
         <p>初めての方にも安心して楽しんでいただけるよう、一人ひとりのペースを大切にしながら<span class="nowrap">お伝えしています。</span></p>
+      </div>
+    </div>
+  </section>
+
+  <section id="testimonials" class="testimonials">
+    <div class="container">
+      <h2>生徒さんの声</h2>
+      <p class="section-intro">実際に通ってくださっている皆さんの声をご紹介します。</p>
+      <div class="testimonial-grid">
+        <article class="testimonial">
+          <p class="testimonial-quote">"</p>
+          <p>定年を間近にして、何か新しいことを始めたいなぁと思っていました。どちらかというと、字を書きたいと思っていましたが、先生の上手な誘導（!?）でいつの間にか絵を描いたりしています。教室のメンバーもとても気さくでいい方ばかりで毎回あっという間の楽しい時間です。この教室のおかげで、長年河内長野に住んでいたのに知らなかったあやたホールの存在が知れてよかったです。</p>
+          <p class="testimonial-name">Y.Tさん</p>
+        </article>
+        <article class="testimonial">
+          <p class="testimonial-quote">"</p>
+          <p>以前から絵手紙を時間が出来たら行きたいと思ってたので、SNSで筆ふわりでサッと書ける絵と字がすごく魅力でこれはスゴイ、友人にハガキを出したいと思い習いはじめました。2時間半があっという間で毎回若い方と楽しんでいます。先々自分で作品が出来たらいいなぁと思いますが、楽しんでます。</p>
+          <p class="testimonial-name">S.Hさん</p>
+        </article>
+        <article class="testimonial">
+          <p class="testimonial-quote">"</p>
+          <p>筆文字アートは「失敗」がなくどんな線も味になりますが、少しでも可愛く描きたいもの。レッスン中「困ったな」と思っても、先生がすぐに寄り添い魅力的に活かすアドバイスをしてくれるので、初めてでも安心して大満足の作品に仕上がります。先日の金魚作りでは「イルカ！」「ペンギン！」と見え方の違いをみんなで笑い合えるほど和やかな雰囲気です。「幸せ涙」を書いた際も、先生の言葉からリハビリを頑張る父を思い浮かべるなど、自分の気持ちをそっと見つめ直せる大切なひとときになっています。</p>
+          <p class="testimonial-name">J・Oさん</p>
+        </article>
       </div>
     </div>
   </section>
