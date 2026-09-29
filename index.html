@@ -147,6 +147,9 @@
       letter-spacing:.12em;
     }
     .event-card h2{margin:0 0 18px}
+    .event-photo{margin:0 auto 24px;max-width:250px}
+    .event-photo img{display:block;width:100%;height:auto;border-radius:6px;box-shadow:0 10px 26px rgba(120,80,70,.18)}
+    .event-photo figcaption{margin-top:9px;font-size:.8rem;color:#7a6d65;letter-spacing:.06em}
     .event-copy{max-width:620px;margin:0 auto 25px;color:var(--sub);line-height:2}
     .event-details{
       display:grid;
@@ -171,6 +174,8 @@
     .event-price .price-num{font-size:1.5rem;font-family:"Noto Serif JP",serif;color:var(--ink)}
     .event-cta{padding:18px 46px;font-size:1.05rem;box-shadow:0 12px 28px rgba(189,129,119,.34)}
     .event-note{margin:17px 0 0;font-size:.84rem;color:#7a6d65}
+    .event-contact{margin:12px 0 0;font-size:.86rem;color:#7a6d65;line-height:1.9}
+    .event-contact a{color:var(--pink-dark);text-decoration:underline;text-underline-offset:3px}
 
     .about{background:var(--paper)}
     .about-copy p{margin:0 0 18px;color:var(--sub);line-height:2}
@@ -325,30 +330,37 @@
   <section class="event-info">
     <div class="narrow">
       <div class="event-card">
-        <span class="event-badge">あやたホール広報 限定告知</span>
-        <p class="event-label">あやたホール広報をご覧の皆さまへ</p>
+        <span class="event-badge">はじめての方へ｜10月開催</span>
+        <p class="event-label">筆ふわりからのお知らせ</p>
         <h2>🍂 10月28日（水）<br>筆文字アート ミニ講座</h2>
-        <p class="event-copy">「筆文字アートって、どんなもの？」という方のための、はじめてのミニ講座です。筆文字アートについてのお話と、簡単なモチーフを描く体験をご用意しました。絵や字に自信がなくても大丈夫。初めての方も、どうぞ気軽にご参加ください。手ぶらでお越しいただけます。</p>
+        <figure class="event-photo"><img src="gallery-sakura.jpg" alt="筆文字アートの作品例「桜の便り」"><figcaption>作品のイメージ</figcaption></figure>
+        <p class="event-copy">筆文字アートに興味はあるけれど、どんなものか分からない。そんな方に向けた、筆ふわりのはじめてのミニ講座です。絵や字に自信がなくても大丈夫。どうぞ気軽にご参加ください。手ぶらでお越しいただけます。</p>
         <div class="event-details">
-          <div>
+          <div style="grid-column:1/-1">
             <strong>日時</strong>
             10月28日（水）9:50〜11:50
           </div>
-          <div>
+          <div style="grid-column:1/-1">
             <strong>会場</strong>
-            河内長野市 あやたホール
+            河内長野市 あやたホール 会議室２<br>
+            〒586-0094 河内長野市小山田町1824-4
           </div>
           <div style="grid-column:1/-1">
             <strong>内容</strong>
-            筆文字アートのお話 ＋ 簡単なモチーフを描く体験
+            筆文字アートのお話とことばをひとつ、季節のモチーフをひとつ。<br>ちいさな作品を１枚仕上げます。
+          </div>
+          <div style="grid-column:1/-1">
+            <strong>主催</strong>
+            筆ふわり（筆文字アート教室）
           </div>
         </div>
         <div class="event-price">
           <strong>参加費</strong>
-          <span class="price-num">1,500円</span>（税込）
+          <span class="price-num">1,500円</span>（当日、現金でお願いします。）
         </div>
         <a class="button event-cta" href="https://forms.gle/KGzYxqAbrXPVV3xv6" target="_blank" rel="noopener">10月28日のミニ講座に申し込む</a>
         <p class="event-note">お申込みはGoogleフォームから、1分程度で完了します。</p>
+        <p class="event-contact">ご不明な点は、筆ふわりまでお気軽にどうぞ。<br class="sp-only"><a href="https://forms.gle/H1Z3kYisHE9CYQvy5" target="_blank" rel="noopener">お問い合わせフォームはこちら</a></p>
       </div>
     </div>
   </section>
